@@ -18,6 +18,7 @@ void Exit() {
 }
 
 int main(){
+	Variables();
 
 	Exit();
 	return 0;
