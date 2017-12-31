@@ -18,7 +18,7 @@ void Exit() {
 }
 
 int main(){
-	Variables();
+	ReadDate();
 
 	Exit();
 	return 0;
