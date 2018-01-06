@@ -3,6 +3,7 @@
 #include <climits>
 #include "chapterFour.h"
 #include "chapterFive.h"
+#include "ChapterSix.h"
 
 void Exit() {
 	bool exit = true;
@@ -18,7 +19,7 @@ void Exit() {
 }
 
 int main(){
-	ReadDate();
+	TwoBrackets();
 
 	Exit();
 	return 0;
