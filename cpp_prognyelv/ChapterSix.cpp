@@ -136,3 +136,74 @@ void TwoBrackets() {
 	cout << (a - b, c = d) << endl;
 	cout << (4, (1)) << endl; // left to right
 }	
+
+void ThreeNameAndValue() {
+	map<string, float> pair_map;
+	string name;
+	float value;
+	while (cin >> name >> value) {
+		if (name == "0" || value == 0) break;
+		//cout << name << " " << value << endl;
+		pair_map[name] = value;
+	}
+	//cout << pair_map.size() << endl;
+	float sum = 0;
+	float average = 0;
+	for (std::map<string, float>::iterator it = pair_map.begin(); it != pair_map.end(); ++it) {
+		sum += it->second;
+	}
+	average = sum / pair_map.size();
+	cout << "sum: " << sum << " average: " << average << endl;
+}
+
+void PrintFourTable(int a, int b, char c, int res) {
+	cout << bitset<2>(a) << " " << c << "  (" << a << ")" << endl;
+	cout << bitset<2>(b) << " =" << "  (" << b << ")" << endl;
+	cout << "==" << endl;
+	cout << bitset<2>(res) << "    (" << res << ")" << endl << endl;
+}
+
+void PrintFourShift(int a, int s) {
+	if (s > 0) { // shift to left
+		cout << "orig: " << bitset<2>(a) << " left shifted: " << bitset<2>(a << s) << endl;
+	}
+	else if (s < 0) { // shift to right
+		s = abs(s);
+		cout << "orig: " << bitset<2>(a) << " right shifted: " << bitset<2>(a >> s) << endl;
+	}
+	
+}
+
+void FourBitOperation() {
+	// & - bitenténki és
+	for (int i = 0; i < 2; i++) {
+		for (int j = 0; j < 2; j++) {
+			//PrintFourTable(i, j, '&', i&j);
+		}
+	}
+	// | - bitnekénti vagy
+	for (int i = 0; i < 2; i++) {
+		for (int j = 0; j < 2; j++) {
+			//PrintFourTable(i, j, '|', i|j);
+		}
+	}
+
+	// ^ - bitenkénti vizáróvagy (XOR)
+	for (int i = 0; i < 2; i++) {
+		for (int j = 0; j < 2; j++) {
+			//PrintFourTable(i, j, '^', i^j);
+		}
+	}
+
+	// ~ - bitenkénti 
+	int a = 0;
+	cout << "a: " << bitset<1>(a) << " not a: " << bitset<1>(~a) << endl;
+	a = 1;
+	cout << "a: " << bitset<1>(a) << " not a: " << bitset<1>(~a) << endl;
+
+	// >> - jobbra léptetés
+	PrintFourShift(2, -1);
+
+	// << - balra léptetés
+	PrintFourShift(1, 1);
+}

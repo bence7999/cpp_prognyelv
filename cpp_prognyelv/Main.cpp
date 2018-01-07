@@ -19,7 +19,7 @@ void Exit() {
 }
 
 int main(){
-	TwoBrackets();
+	FourBitOperation();
 
 	Exit();
 	return 0;
