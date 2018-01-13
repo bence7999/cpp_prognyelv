@@ -112,12 +112,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Calculator.cpp" />
     <ClCompile Include="chapterFour.cpp" />
     <ClCompile Include="chapterFive.cpp" />
     <ClCompile Include="ChapterSix.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Calculator.h" />
     <ClInclude Include="chapterFour.h" />
     <ClInclude Include="chapterFive.h" />
     <ClInclude Include="ChapterSix.h" />
