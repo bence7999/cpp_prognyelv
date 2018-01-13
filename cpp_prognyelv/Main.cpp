@@ -1,9 +1,10 @@
-#include <iostream>
+﻿#include <iostream>
 #include <string>
 #include <climits>
 #include "chapterFour.h"
 #include "chapterFive.h"
 #include "ChapterSix.h"
+#include "Calculator.h"
 
 void Exit() {
 	bool exit = true;
@@ -19,11 +20,10 @@ void Exit() {
 }
 
 int main(){
-	char c1[] = "alma";
-	char c2[] = "korte";
-
-	std::cout << ThirteenCat(c1, c2) << std::endl;
+	Calculator();
+	
 
 	Exit();
 	return 0;
 }
+

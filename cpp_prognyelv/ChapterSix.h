@@ -37,3 +37,9 @@ void TenStrcmp(char* c1, char* c2);
 void ElevenErrors(int a, int b);
 
 std::string ThirteenCat(char* c1, char* c2);
+
+void FiveTeenSwitch(int* to, int* from, int count);
+
+int SixTeenAtoi(const char*);
+
+char* mystrcopy(char *dst, const char *src);

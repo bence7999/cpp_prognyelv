@@ -339,3 +339,56 @@ string ThirteenCat(char* c1, char* c2) {
 	//cout << a << endl;
 	return str1+str2;
 }
+
+void FiveTeenSwitch(int* to, int* from, int count) {
+	int n = (count + 7) / 8;
+	switch (count % 8) {
+	case 0: do {
+		*to++ = *from++;
+	case 7: *to++ = *from++;
+	case 6: *to++ = *from++;
+	case 5: *to++ = *from++;
+	case 4: *to++ = *from++;
+	case 3: *to++ = *from++;
+	case 2: *to++ = *from++;
+	case 1: *to++ = *from++;
+	} while (--n>0);
+	}
+}
+
+int SixTeenAtoi(const char* src) {
+	//cout << sizeof(src) << endl;
+	char a[sizeof(src)-1];
+	string str = "";
+	//int b = int(a)-48;
+	//cout << b << endl;
+	int sum = 0;
+	while (*src != 0)
+	{
+		//cout << typeid(*src).name() << endl; // type of value
+		//cout << int(*src)-48 << endl;
+		a[sum] = int(*src) - 48;
+		str += to_string(int(*src) - 48); // int to string
+		sum++;
+		*src++;
+	}
+	for (int i = 0; i < sizeof(a); i++) {
+		//cout << int(a[i]) << endl;
+	}
+	//cout << str << endl;
+	//cout << int(a[0]) << endl;
+	//cout << int(a[1]) << endl;
+	//cout << int(a[2]) << endl;
+
+	//cout << int(a) << endl;
+
+	return atoi(str.c_str());
+}
+
+char* mystrcopy(char *dst, const char *src) {
+	char *ptr;
+	ptr = dst;
+	while (*dst++ = *src++);
+	return(ptr);
+}
+
