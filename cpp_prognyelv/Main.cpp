@@ -19,7 +19,10 @@ void Exit() {
 }
 
 int main(){
-	FourBitOperation();
+	char c1[] = "alma";
+	char c2[] = "korte";
+
+	std::cout << ThirteenCat(c1, c2) << std::endl;
 
 	Exit();
 	return 0;

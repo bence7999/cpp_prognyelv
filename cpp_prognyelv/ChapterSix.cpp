@@ -207,3 +207,135 @@ void FourBitOperation() {
 	// << - balra léptetés
 	PrintFourShift(1, 1);
 }
+
+void FiveUndefinedStructure() {
+	unsigned char c2 = 1256;
+	cout << int(c2) << endl; // 232 lesz
+}
+
+void FiveDependOnImplementation() {
+	const int size = 4 * 1024;
+	char page[size];
+
+	page[size + size] = 7; // nem meghatározható
+}
+
+int g(int a) {return 2 * a;}
+
+int f(int b) {return 3 * b;}
+
+void SevenEvaluation() {
+	int x = f(2) + g(3); // nem meghatározott, hogy f() vagy g() hívódik meg elõször
+	cout << x << endl;
+
+	int v[2] = { 1, 2 };
+	int i = 1;
+	v[i] = i++; // nem meghatározott eredmény
+}
+
+void EightException() {
+	// cout << 1 / 0 << endl; // error : divide by zero
+	stack<int> mystack;
+	//mystack.pop(); // assert: empty before pop
+	// int array[1000000]; // 0xC00000FD: Stack overflow (parameters: 0x00000000, 0x002B2000).
+}
+
+struct Panda
+{
+	int Ma() {
+		int x = 5;
+		int* y = &x;
+		return *y;
+	}
+};
+
+void NineBrackets() {
+	int a = 5;
+	int *p = &a;
+	// *p++
+	cout << (*p)++ << endl;
+	// *--p
+	cout << --(*p) << endl;
+	// ++a--
+	cout << (++a)-- << endl;
+
+	Panda* pa = new Panda();
+	//(int*)p->m;
+	cout << (int*)pa->Ma() << endl;
+	//*p.m;
+	int* arr[3];
+	int i = 1;
+	//*a[i]
+	*arr[i];
+}
+
+int TenStrlen(char* c) { // 5.3.1. Tömbök bejárása
+	int sum = 0;
+	//cout << c << endl << endl;
+	for (char* p = c; *p != 0; p++) {
+		//cout << p << endl;
+		sum++;
+	}
+	int sum2 = 0;
+	for (int i = 0; c[i] != 0; i++) {
+		//cout << c[i] << endl;
+		sum2++;
+	}
+	if (sum == sum2)
+		return sum;
+	else
+		return 4;
+}
+
+char* TenStrcpy(char* cf, char* ct) {
+	cout << strlen(cf) << endl;
+	//cout << strcat_s(cf, ct);
+	strcpy(cf, ct);
+	return cf;
+}
+
+void TenStrcmp(char* c1, char* c2) {
+
+}
+
+void ElevenErrors(int a, int b) {
+	if (a = 3)
+		cout << "no" << endl; // True
+	if (a & 077 == 0)
+		cout << "nono" << endl; // False
+	//a: = b + 1; //Expected az expression
+}
+
+string ThirteenCat(char* c1, char* c2) { 
+	cout << strlen(c1) << endl;
+	size_t sum = strlen(c1) + strlen(c2);
+	//cout << sum << endl;
+	char* a = new char[sum];
+	
+	cout << "a: " << sizeof(a) << " " << strlen(a) << endl;
+
+	//char* b = c1;
+	//char* c = c2;
+
+	// cout << b[0] << " " << c[0] << endl;
+
+	/*for (char* p = c1; *p != 0; p++) {
+		cout << *p << endl;
+	}*/
+	//cout << "sizeof a: " << sizeof(a) << endl;
+	string str1(c1);
+	string str2(c2);
+
+	cout << sizeof(c1) << " " << sizeof(c2) << endl;
+	for (int i = 0; i < sizeof(c1); i++) {
+		a[i] = c1[i];
+	}
+	for (int i = 0; i < sizeof(c2); i++) {
+		a[sizeof(c1)+i] = c2[i];
+	}
+	for (char* p = a; *p != 0; p++) {
+		//cout << 1 << endl;
+	}
+	//cout << a << endl;
+	return str1+str2;
+}
