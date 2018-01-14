@@ -290,7 +290,7 @@ int TenStrlen(char* c) { // 5.3.1. Tömbök bejárása
 char* TenStrcpy(char* cf, char* ct) {
 	cout << strlen(cf) << endl;
 	//cout << strcat_s(cf, ct);
-	strcpy(cf, ct);
+	//strcpy(cf, ct);
 	return cf;
 }
 

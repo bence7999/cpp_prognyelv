@@ -19,9 +19,9 @@ void Exit() {
 	}
 }
 
-int main(){
-	Calculator();
-	
+int main(int argc, char* argv[]){
+
+	Calculator(argc, argv);
 
 	Exit();
 	return 0;

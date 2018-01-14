@@ -2,6 +2,9 @@
 
 using namespace std;
 
+//#define THROW_MY_EXCEPTION( msg ) throw MyException( (msg), __FILE__, __LINE__) // macro: kicserélni a sima error-t olyanra ami tartalmazza a file-t és line-t
+
+
 //////////////////////////////////////////////////////
 ////                 Hibakezelés                  ////
 /////////////////////////////////////////////////////
@@ -10,8 +13,8 @@ int no_of_errors;
 
 double error(const string& s, char const * file, long line) {
 	no_of_errors++;
-	cerr << "Error: " << s << endl;
-	cerr << error << " in \"" << file << "\",line:" << line;
+	cerr << endl << "Error: " << s << endl;
+	cerr << error << " in \"" << file << "\",line:" << line << endl;
 	return 1;
 }
 
@@ -132,7 +135,7 @@ Token_value get_token() {
 	case '0': case '1': case '2': case '3': case '4': 
 	case '5': case '6': case '7': case '8': case '9':
 	case '.':
-		cin.putback(ch);
+		cin.putback(ch); // visszateszi a cin-re
 		cin >> number_value;
 		return curr_tok = NUMBER;
 	default:
@@ -140,7 +143,7 @@ Token_value get_token() {
 			string_value = ch;
 			while (cin.get(ch) && isalnum(ch))
 			{
-				string_value.push_back(ch);
+				string_value.push_back(ch); // char-t csap a végére
 			}
 			cin.putback(ch);
 			return curr_tok = NAME;
@@ -155,7 +158,23 @@ Token_value get_token() {
 ////       kezdeti értékadás, kimenet hibák       ////
 /////////////////////////////////////////////////////
 
-int Calculator() {
+istream* input;
+
+int Calculator(int argc, char* argv[]) {
+
+	switch (argc)
+	{
+	case 1: {
+		input = &cin;
+		break;
+	}
+	case 2: {
+		input = new istringstream(argv[1]);
+		break;
+	}
+	default:
+		error("túl sok parameter", __FILE__, __LINE__);
+	}
 
 	table["pi"] = 3.1415926535897932385;
 	table["e"] = 2.7182818284590452354;
@@ -169,5 +188,7 @@ int Calculator() {
 		cout << expr(false) << endl;
 	}
 
+	if (input != &cin)
+		delete input;
 	return no_of_errors;
 }

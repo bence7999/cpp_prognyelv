@@ -1,6 +1,6 @@
 #include <iostream>
 #include <map>
 #include <string>
-#include <cctype>
+#include <sstream>
 
-int Calculator();
+int Calculator(int argc, char* argv[]);
