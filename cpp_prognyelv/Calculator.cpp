@@ -8,23 +8,24 @@ using namespace std;
 
 int no_of_errors;
 
-double error(const string& s) {
+double error(const string& s, char const * file, long line) {
 	no_of_errors++;
-	cerr << "hiba: " << s << endl;
+	cerr << "Error: " << s << endl;
+	cerr << error << " in \"" << file << "\",line:" << line;
 	return 1;
 }
 
 //////////////////////////////////////////////////////
-////                   Elemző                    ////
+////        Elemző (szintaktikai elemzés         ////
 /////////////////////////////////////////////////////
 
 map<string, double> table;
 double number_value;
 string string_value;
 
-double term(bool get);
-double expr(bool get);
-double prim(bool get);
+double term(bool);
+double expr(bool);
+double prim(bool);
 
 enum Token_value {
 	NAME, NUMBER, END,
@@ -36,33 +37,34 @@ Token_value curr_tok = PRINT;
 Token_value get_token();
 
 double prim(bool get) {
-	if (get) get_token();
+	if (get) 
+		get_token();
 
 	switch (curr_tok)
 	{
-	case NUMBER: {
-		double v = number_value;
-		get_token();
-		return v;
-	}
-	case NAME: {
-		double& v = table[string_value];
-		if (get_token() == ASSIGN)
-			v = expr(true);
-		return v;
-	}
-	case MINUS: {
-		return -prim(true);
-	}
-	case LP: {
-		double e = expr(true);
-		if (curr_tok != RP)
-			return error(") szükséges!");
-		get_token();
-		return e;
-	}
-	default:
-		return error("elemi szimbolum szukseges!");
+		case NUMBER: {
+			double v = number_value;
+			get_token();
+			return v;
+		}
+		case NAME: {
+			double& v = table[string_value];
+			if (get_token() == ASSIGN)
+				v = expr(true);
+			return v;
+		}
+		case MINUS: {
+			return -prim(true);
+		}
+		case LP: {
+			double e = expr(true);
+			if (curr_tok != RP)
+				return error(") szükséges!", __FILE__, __LINE__);
+			get_token();
+			return e;
+		}
+		default:
+			return error("elemi szimbolum szukseges!", __FILE__, __LINE__);
 	}
 
 }
@@ -81,7 +83,7 @@ double term(bool get) {
 				left /= d;
 				break;
 			}
-			return error("Nullavan nem osztunk!"); // 6.1.4
+			return error("Nullaval nem osztunk!", __FILE__, __LINE__); // 6.1.4
 		default:
 			return left;
 		}
@@ -107,14 +109,14 @@ double expr(bool get) {
 }
 
 //////////////////////////////////////////////////////
-////              Bemeneti függveny               ////
+////     Bemeneti függveny (lexikai elemzés)     ////
 /////////////////////////////////////////////////////
 
 Token_value get_token() {
 	char ch;
 
 	do {
-		if ( !cin.get(ch) )
+		if ( !cin.get(ch) ) // cin.get olyan mint a cin >>; beolvas egy char-t ch ba, csak nem ugorja át az üreshelyeket
 			return curr_tok = END;
 	} while (ch != '\n' && isspace(ch));
 
@@ -125,13 +127,7 @@ Token_value get_token() {
 		return curr_tok = PRINT;
 	case 0:
 		return curr_tok = END;
-	case '*':
-	case '/':
-	case '+':
-	case '-':
-	case '(':
-	case ')':
-	case '=':
+	case '*': case '/': case '+': case '-': case '(': case ')': case '=':
 		return curr_tok = Token_value(ch);
 	case '0': case '1': case '2': case '3': case '4': 
 	case '5': case '6': case '7': case '8': case '9':
@@ -149,13 +145,14 @@ Token_value get_token() {
 			cin.putback(ch);
 			return curr_tok = NAME;
 		}
-		error("rossz szimbolum!");
+		error("rossz szimbolum!", __FILE__, __LINE__);
 		return curr_tok = PRINT;
 	}
 }
 
 //////////////////////////////////////////////////////
 ////            Calculator Vezérlő               ////
+////       kezdeti értékadás, kimenet hibák       ////
 /////////////////////////////////////////////////////
 
 int Calculator() {
