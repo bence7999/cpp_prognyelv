@@ -28,18 +28,21 @@ void EightException();
 
 void NineBrackets();
 
-int TenStrlen(char* c);
+int TenStrlen(char*);
 
-char* TenStrcpy(char* cf, char* ct);
+char* TenStrcpy(char*, char*);
 
-void TenStrcmp(char* c1, char* c2);
+void TenStrcmp(char*, char*);
 
-void ElevenErrors(int a, int b);
+void ElevenErrors(int, int);
 
-std::string ThirteenCat(char* c1, char* c2);
+std::string ThirteenCat(char*, char*);
 
-void FiveTeenSwitch(int* to, int* from, int count);
+void FiveTeenSwitch(int*, int*, int);
 
 int SixTeenAtoi(const char*);
 
-char* mystrcopy(char *dst, const char *src);
+char* mystrcopy(char*, const char*);
+
+void TwentyTwoWithoutComment();
+

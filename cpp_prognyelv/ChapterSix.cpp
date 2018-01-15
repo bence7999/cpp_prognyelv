@@ -392,3 +392,103 @@ char* mystrcopy(char *dst, const char *src) {
 	return(ptr);
 }
 
+int get_char() {
+
+	char SLASH = '/';
+	char ch;
+
+	ch = cin.get();
+
+	if (isalpha(ch)) {
+		//cout << "alpha" << endl;
+		cin.putback(ch);
+		return 1;
+	}
+	else if (ch == SLASH){
+		cin.putback(ch);
+		return 2;
+	}
+	return 0;
+}
+
+void TwentyTwoWithoutComment() {
+
+	bool loop = true;
+	string str;
+	string bin;
+	char ch;
+	string tmp;
+	int i;
+
+	while (loop)
+	{
+		i = get_char();
+		switch (i)
+		{
+		case 0: {
+			loop = false;
+		}
+		case 1: {
+			ch = cin.get();
+			str.push_back(ch);
+			break;
+		}
+		case 2: {
+			if (!tmp.empty()) {
+				//ch = cin.get();
+				getline(cin, bin);
+				break;
+			}
+			else {
+				ch = cin.get();
+				tmp.push_back(ch);
+				break;
+			}
+
+		}	
+		default:
+			break;
+		}
+	}
+	
+	
+
+	cout << str << endl;
+
+	/*string str;
+	string bin;
+	string tmp;
+	bool inComment = false;
+	char SLASH = '/';*/
+	//string ONE_LINE = "//", MULTI_LINE_FROM = "/*", MULTI_LINE_TO = "*/";
+
+	/*while (cin)
+	{
+		ch = cin.get();
+
+		if (ch == SLASH) {
+			if(tmp.empty())
+				tmp.push_back(ch);
+			else if (!tmp.empty()) {
+				tmp.push_back(ch);
+				if (tmp == ONE_LINE) {
+					getline(cin, bin);
+				}
+				else if (tmp == MULTI_LINE_FROM) {
+					inComment = true;
+				}
+				else if (tmp == MULTI_LINE_TO) {
+					inComment = false;
+				}
+			}
+		}
+		else if (!inComment) {
+			str.push_back(ch);
+		}
+		else if (inComment) {
+			bin.push_back(ch);
+		}
+	}
+	cout << str;*/
+}
+
