@@ -5,12 +5,13 @@
 #include "chapterFive.h"
 #include "ChapterSix.h"
 #include "Calculator.h"
+#include "ChapterSeven.h"
 
 void Exit();
 
 int main(int argc, char* argv[]){
 
-	TwentyTwoWithoutComment();
+	AddElemToTnode("alma");
 
 	Exit();
 	return 0;

@@ -116,6 +116,7 @@
     <ClCompile Include="Calculator.cpp" />
     <ClCompile Include="chapterFour.cpp" />
     <ClCompile Include="chapterFive.cpp" />
+    <ClCompile Include="ChapterSeven.cpp" />
     <ClCompile Include="ChapterSix.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
@@ -123,6 +124,7 @@
     <ClInclude Include="Calculator.h" />
     <ClInclude Include="chapterFour.h" />
     <ClInclude Include="chapterFive.h" />
+    <ClInclude Include="ChapterSeven.h" />
     <ClInclude Include="ChapterSix.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
