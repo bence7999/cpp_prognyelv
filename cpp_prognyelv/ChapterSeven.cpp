@@ -117,6 +117,8 @@ struct Tnode {
 	Tnode()
 	{
 		count = 0;
+		left = NULL;
+		right = NULL;
 	}
 	~Tnode() {}
 } root;
@@ -124,29 +126,86 @@ struct Tnode {
 Tnode* rootNode = &root;
 
 Tnode* getLastTnode(Tnode* node) {
+	Tnode* left = NULL;
+	Tnode* right = NULL;
+	int max = 0;
 
-	Tnode* last = node;
-	Tnode* tmp;
+	if (node->left != NULL)
+		left = getLastTnode(node->left);
 
-	while (true)
-	{
-		if (node->right == NULL) {
-			if (node->left == NULL) {
-				return last;
-			}
-			else {
-				tmp = getLastTnode(node->left);
-				if (tmp->count > last->count)
-					last = tmp;
-			}
+	if (node->right != NULL)
+		right = getLastTnode(node->right);
+
+	if (node->left == NULL && node->right == NULL)
+		return node;
+
+	if (left != NULL)
+		if (right != NULL)
+			if (left->count > right->count)
+				return left;
+			else
+				return right;
+		else
+			return left;
+	else
+		return right;
+
+}
+
+int getRow(int num) {
+
+	for (int i = 1; i <= num + 1; i++) {
+		if (pow(2, i - 1) - 2 < num && pow(2, i) - 2 >= num) {
+			return i;
 		}
-		else {
-			tmp = getLastTnode(node->right);
-			if (tmp->count > last->count)
-				last = tmp;
-		}
-		
 	}
+}
+
+Tnode* getNode(Tnode* node, int count) {
+	Tnode* localNode = node;
+	int localCount = count;
+
+	if (node->count == count)
+		return node;
+		
+	for (int i = 0; i < count; i++) {
+		if (localNode->left->count == count)
+			return localNode->left;
+		if (localNode->right->count == count)
+			return localNode->right;
+		for (int j = 0; j < count; j++) {
+			int root = (localCount - 1) / 2;
+			if (localNode->left->count == root)
+				localNode = localNode->left;
+			if (localNode->right->count == root)
+				localNode = localNode->right;
+			localCount = root;
+		}
+		localCount = count;
+	}
+}
+
+Tnode* findNode(Tnode* node) {
+	//cout << node->count << endl;
+	int num = node->count;
+	int row = getRow(num);
+
+	if (num == pow(2, row) - 2) {
+		if (num == 0)
+			return node;
+		else {
+			int length = pow(2, row - 1);
+			int last = num - (length - 1);
+			return getNode(rootNode, last);
+		}
+	}
+	else if (num < pow(2, row) - 2) {
+		return getNode(rootNode, floor(num/2));
+	}
+	else
+		cout << "error!" << endl;
+
+	return node;
 }
 
 void AddElemToTnode(string newString) {
@@ -161,7 +220,18 @@ void AddElemToTnode(string newString) {
 	Tnode* newNode = new Tnode();
 	newNode->word = newString;
 
-	getLastTnode(rootNode);
+	Tnode* lastNode;
+	lastNode = getLastTnode(rootNode);
+	cout << "last node: " << lastNode->count << endl;
+	newNode->count = (lastNode->count)+1;
+	lastNode = findNode(lastNode);
+
+	if (lastNode->left == NULL)
+		lastNode->left = newNode;
+	else
+		lastNode->right = newNode;
+
+	//cout << getLastTnode(rootNode)->count << endl;
 
 }
 

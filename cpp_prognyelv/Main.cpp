@@ -11,7 +11,15 @@ void Exit();
 
 int main(int argc, char* argv[]){
 
-	AddElemToTnode("alma");
+	AddElemToTnode("1");
+	AddElemToTnode("2");
+	AddElemToTnode("3");
+	AddElemToTnode("4");
+	AddElemToTnode("5");
+	AddElemToTnode("6");
+	AddElemToTnode("7");
+	AddElemToTnode("8");
+	//AddElemToTnode("9");
 
 	Exit();
 	return 0;
