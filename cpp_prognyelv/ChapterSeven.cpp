@@ -238,3 +238,5 @@ void AddElemToTnode(string newString) {
 void DeledeteNode(Tnode* node) {
 	delete node;
 }
+
+// 8.
